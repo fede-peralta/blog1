@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+
+<title>{% block title %} Noticias  {% endblock title%}</title>
+{% block contenido%}
+
+ 
+
+<!-- Testimonial Start -->
+
+
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="section-title">
+            <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Noticias</h4>
+            <h1 class="display-4">Estas son las ultimas noticias</h1>
+        </div>
+        <div class="owl-carousel testimonial-carousel">
+            {% for i in noticias %}
+           
+            <div class="testimonial-item">
+                <div class="d-flex align-items-center mb-3">
+                    <img class="img-fluid" src="{{ i.imagen.url }}" alt="">
+                    <div class="ml-3">
+                        </h4>{{i.titulo}}</h4>
+                        <h3>{{i.subtitulo}}</h3>
+                        <i>{{i.fecha}}</i>
+                       
+                    </div>
+                    <a id="boton_post" href="{% url 'apps.noticia:noticias_individual' i.id%}">
+                        Ingrese a este posts
+                    </a>
+                </div>
+                <p class="m-0">{{ i.texto}}</p>
+            {%endfor%}    
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Include jQuery and Owl Carousel -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    $(".owl-carousel").owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+    });
+});
+</script>
+<!-- Testimonial End -->
+
+{% endblock %}

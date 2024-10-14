@@ -1,0 +1,2 @@
+# vista basada en clase
+

@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -13,7 +13,9 @@ SECRET_KEY = 'django-insecure-ti5j%c5q2!y0tad^8paxa)o*zu_2gky(xkdaaa^2s1-rn8u96t
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
+DEBUG = True
 
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -26,7 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'apps.noticias', # avisamos a django que se creo una nueva apps
+    'apps.noticia', # avisamos a django que se creo una nueva apps
 ]
 
 MIDDLEWARE = [
@@ -44,7 +46,7 @@ ROOT_URLCONF = 'Noticias.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':[os.path.join(os.path.dirname(BASE_DIR),'Noticias/templates')],
+        'DIRS':[os.path.join(BASE_DIR),'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,7 +65,12 @@ WSGI_APPLICATION = 'Noticias.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -100,15 +107,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR),'Noticias/static'),)  #(aca se muestran las img que no cambiara. estatica)
-
-
+STATICFILES_DIRS = [ 
+    BASE_DIR / "static",  
+    
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR),'media')
+
